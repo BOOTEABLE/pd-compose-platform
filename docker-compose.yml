@@ -29,3 +29,18 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  users_service:
+    build: ./users_service
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./users_service:/app
+    environment:
+      DB_HOST: db
+      DB_NAME: biblioteca
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
+    depends_on:
+      db:
+        condition: service_healthy      
